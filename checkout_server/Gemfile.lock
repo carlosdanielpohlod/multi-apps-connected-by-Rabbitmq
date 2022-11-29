@@ -74,6 +74,8 @@ GEM
     debug (1.6.3)
       irb (>= 1.3.6)
       reline (>= 0.3.1)
+    enumerize (2.5.0)
+      activesupport (>= 3.2)
     erubi (1.11.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -157,13 +159,14 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  enumerize
   puma (~> 5.0)
   rails (~> 7.0.4)
   sqlite3 (~> 1.4)
   tzinfo-data
 
 RUBY VERSION
-   ruby 2.7.6p219
+   ruby 3.1.2p20
 
 BUNDLED WITH
    2.1.4
