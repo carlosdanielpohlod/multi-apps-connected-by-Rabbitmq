@@ -1,0 +1,11 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "database": "${workspaceFolder:multi-apps-connected-by-Rabbitmq}/client_server/db/development.sqlite3",
+      "name": "multi_apps"
+    }
+  ],
+  "sqltools.useNodeRuntime": true
+}
