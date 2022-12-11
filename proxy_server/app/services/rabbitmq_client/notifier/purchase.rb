@@ -1,4 +1,5 @@
-class RabbitmqClient::Notifier::Purchase
+class RabbitmqClient::Notifier::Purchase < RabbitmqClient::BaseClient
+
   def initialize(purchase:)
     @purchase = purchase
   end

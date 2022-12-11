@@ -15,7 +15,7 @@ services:
       default:
       internal:
         aliases:
-          - client-backend-server
+          - proxy-backend-server
     ports:
       - '3035:3035'
       - '5000:5000'

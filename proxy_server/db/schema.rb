@@ -20,10 +20,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_222149) do
 
   create_table "purchases", force: :cascade do |t|
     t.boolean "completed", default: false, null: false
-    t.integer "users_id", null: false
-    t.integer "products_id", null: false
-    t.index ["products_id"], name: "index_purchases_on_products_id"
-    t.index ["users_id"], name: "index_purchases_on_users_id"
+    t.integer "user_id", null: false
+    t.integer "product_id", null: false
+    t.index ["product_id"], name: "index_purchases_on_product_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
