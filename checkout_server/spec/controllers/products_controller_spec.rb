@@ -6,7 +6,7 @@ RSpec.describe ProductsController, type: :controller do
       {
         name: 'sample',
         price: '10.0',
-        id: '1'
+        authenticated: true
       }
     end
 
@@ -15,22 +15,24 @@ RSpec.describe ProductsController, type: :controller do
         .to receive(:create)
     end
 
-    it 'calls Product.create with correct params' do
-      post :create, params: params
+    context 'when authorized' do
+      it 'calls Product.create with correct params' do
+        post :create, params: params
 
-      expect(Product)
-        .to have_received(:create)
-        .with(
-          price: params[:price],
-          name: params[:name],
-          external_reference_id: params[:id]
-        )
-    end
+        expect(Product)
+          .to have_received(:create)
+          .with(
+            price: params[:price],
+            name: params[:name],
+            external_reference_id: params[:id]
+          )
+      end
 
-    it 'returns success status' do
-      post :create, params: params
+      it 'returns success status' do
+        post :create, params: params
 
-      expect(response.status).to eq(201)
+        expect(response).to have_http_status(201)
+      end
     end
   end
 end

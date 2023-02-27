@@ -5,7 +5,8 @@ class ProductsController < ApplicationController
       name: params[:name],
       external_reference_id: params[:id]
     )
-
-    head(:created)
+    
+    created_event = Events::Product::Created.new(product_id: product_id)
+    notify(created_event)
   end
 end
