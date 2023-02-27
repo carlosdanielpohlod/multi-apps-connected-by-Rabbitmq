@@ -1,17 +1,38 @@
-version: '3.7'
+version: '3.3'
 
 services:
-  rabbitmq:
-    image: rabbitmq:3-management
-    hostname: rabbitmq
+  checkout_server:
+    build:
+      context: ./checkout_server
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: checkout_server
+    environment:
+      - RAILS_ENV=development
     volumes:
-      - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
-      - ./rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
-      - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
-      - ./rabbitmq/logs:/var/log/rabbitmq/log
+      - ./checkout_server:/myapp
     ports:
-      - 5672:5672
-      - 15672:15672
- 
-volumes:
-  bundle_path:
+      - "3000:3000"
+    depends_on:
+      - rabbitmq
+
+  proxy_server:
+    build:
+      context: ./proxy_server
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: proxy_server
+    environment:
+      - RAILS_ENV=development
+    volumes:
+      - ./proxy_server:/myapp
+    ports:
+      - "3001:3000"
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "15672:15672"
+      - "5672:5672"

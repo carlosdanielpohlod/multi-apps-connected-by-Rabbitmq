@@ -1,31 +1,34 @@
-FROM rabbitmq:3.8-management
+# imagem base para as aplicações Rails
+FROM ruby:3.1.2
 
-ENV DEBIAN_FRONTED=noninteractive
+# instalando as dependências
+RUN apt-get update -qq && \
+    apt-get install -y build-essential libpq-dev nodejs
 
-# On change this settings, check the state on "before_script" in .gitlab-ci.yml
-RUN apt-get update && apt-get install -y \
-  sudo \
-  build-essential \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# setando o diretório de trabalho
+RUN mkdir /myapp
+WORKDIR /myapp
 
-# ADD an user
-RUN adduser --disabled-password --gecos '' devel \
-  && usermod -a -G sudo devel \
-  && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-  && echo 'devel:devel' | chpasswd
+ARG APP_NAME
 
-ENV HOME=/home/devel
-ENV PATH=${PATH}:${BUNDLE_PATH}/bin
+# instalando as gems do Rails
+COPY ${APP_NAME}/Gemfile /myapp/Gemfile
+COPY ${APP_NAME}/Gemfile.lock /myapp/Gemfile.lock
+RUN bundle install
 
-RUN mkdir -p ${HOME} && \
-  chown -R devel:devel ${HOME} && \
-  mkdir -p ${APP} && \
-  chown -R devel:devel ${APP} && \
-  mkdir -p ${BUNDLE_PATH} && \
-  chown -R devel:devel /bundle
+# copiando o código da aplicação para o container
+COPY . /myapp
 
-USER devel:devel
-WORKDIR $APP
+# setando a variável de ambiente para o Rails
+ENV RAILS_ENV=development
 
-CMD ["/usr/bin/sudo", "/usr/sbin/sshd", "-D"]
+# rodando os comandos do Rails
+RUN rails db:create && \
+    rails db:migrate && \
+    rails db:seed
+
+# expondo a porta
+EXPOSE 3000
+
+# iniciando o servidor
+CMD ["rails", "server", "-b", "0.0.0.0"]

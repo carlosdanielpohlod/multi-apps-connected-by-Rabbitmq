@@ -4,7 +4,7 @@ class Purchases::Updater
   end
 
   def call
-    purchase.update(completed: @update_event[:completed])
+    purchase.update(status: @update_event[:status])
   end
 
   private

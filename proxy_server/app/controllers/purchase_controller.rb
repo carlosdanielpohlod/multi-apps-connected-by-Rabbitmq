@@ -1,6 +1,6 @@
 class PurchaseController < ApplicationController
   def create
-    Purchases::Creator.new(user: current_user, product: product).call
+    Purchase.create(user: user, product: product)
 
     render json: { msg: 'processing, wait a moment' }, status: :processing
   end
