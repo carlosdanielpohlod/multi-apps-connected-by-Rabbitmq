@@ -3,7 +3,7 @@ class RabbitmqClient::BaseClient
 
   def initialize
     @channel = connection.channel
-    @queue = @channel.queue(ENV['DEFAULT_ROUTING_KEY'], durable: true)
+    # @queue = @channel.queue(ENV['DEFAULT_ROUTING_KEY'], durable: true)
   end
 
   private
