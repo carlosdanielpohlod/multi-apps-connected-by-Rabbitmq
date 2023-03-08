@@ -1,13 +1,13 @@
 class PurchaseController < ApplicationController
   def create
-    Purchase.create(user: user, product: product)
+    Product.create(permitted_params)
     
     render json: { msg: 'processing, wait a moment' }, status: :processing
   end
 
   private
 
-  def product
-    @product ||= Product.find(params[:product_id])
+  def permitted_params
+    params.permit(:name, :price, :description, :color)
   end
 end

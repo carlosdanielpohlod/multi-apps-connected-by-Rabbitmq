@@ -1,4 +1,6 @@
 class Purchase < ApplicationRecord
+  include Notifiable
+  
   belongs_to :user
   belongs_to :product
 

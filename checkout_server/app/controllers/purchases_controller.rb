@@ -2,17 +2,17 @@ class PurchasesController < ApplicationController
   before_action :verify_authentication
 
   def create
-    Purchase.create(
+    purchase = Purchase.create(
       product_id: params[:product_id],
       status: 'created',
       external_user_id: params[:external_user_id]
     )
 
-    notify(current_status_event)
+    notify(current_status_event(purchase.id))
   end
 
   def show
-    notify(current_status_event)
+    notify(current_status_event(params[:purchase_id]))
   end
 
   private

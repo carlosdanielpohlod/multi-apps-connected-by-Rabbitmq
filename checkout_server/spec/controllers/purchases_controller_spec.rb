@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe PurchasesController, type: :controller do
+  
+  setup do
+    allow(RabbitmqClient::Notifier)
+      .to receive(:call)
+  end
+
   describe 'POST create' do
     let(:product) { FactoryBot.create :product }
 
