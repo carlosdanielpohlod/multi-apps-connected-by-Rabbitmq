@@ -1,12 +1,12 @@
 class Events::Product::Created
-  def initialize(purchase_id:)
-    @purchase_id = purchase_id
+  def initialize(product_id:)
+    @product_id = product_id
   end
 
   def payload
     @payload ||= {
-      subject: 'purchase_changed_status',
-      purchase_id: @purchase_id
+      subject: 'product_created',
+      product_id: @product_id
     }
   end
 end

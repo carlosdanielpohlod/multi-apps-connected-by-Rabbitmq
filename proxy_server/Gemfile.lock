@@ -184,6 +184,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  amq-protocol (~> 2.3.2)
   bootsnap
   bunny
   debug

@@ -1,4 +1,4 @@
-class Events::Purchase::CurrentStatus
+class Events::Purchase::Created
   def initialize(purchase:)
     @purchase = purchase
   end

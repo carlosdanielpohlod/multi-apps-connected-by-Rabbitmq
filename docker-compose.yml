@@ -4,6 +4,9 @@ services:
   checkout_server:
     stdin_open: true
     tty: true
+     
+    tmpfs:
+      - /tmp
     build:
       context: ./checkout_server
       dockerfile: Dockerfile
@@ -11,12 +14,16 @@ services:
         APP_NAME: checkout_server
     environment:
       - RAILS_ENV=development
+      - APP_NAME=checkout_server
     volumes:
       - ./checkout_server:/myapp
+      - bundle_path:/bundle
     ports:
       - "3000:3000"
     depends_on:
       - rabbitmq
+    extra_hosts:
+      - "rabbitmq:172.17.0.1"
     networks:
       internal:
         aliases:
@@ -32,6 +39,7 @@ services:
         APP_NAME: proxy_server
     environment:
       - RAILS_ENV=development
+      - APP_NAME=proxy_server
     volumes:
       - ./proxy_server:/myapp
     ports:
