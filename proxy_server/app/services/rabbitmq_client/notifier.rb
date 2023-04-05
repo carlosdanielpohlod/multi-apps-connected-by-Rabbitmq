@@ -4,7 +4,7 @@ class RabbitmqClient::Notifier
   end
 
   def call
-    channel.queue.publish(
+    channel.queue('proxy_to_checkout').publish(
       @event.payload.to_json,
       routing_key: ENV['DEFAULT_ROUTING_KEY']
     )
