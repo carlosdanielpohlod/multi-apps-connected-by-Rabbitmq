@@ -1,4 +1,4 @@
-class PurchaseController < ApplicationController
+class PurchasesController < ApplicationController
   def create
     Purchase.create(user: user, product: product)
     

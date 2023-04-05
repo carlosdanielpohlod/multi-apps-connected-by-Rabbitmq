@@ -28,7 +28,7 @@ RUN rails db:create && \
     rails db:seed
 
 # expondo a porta
-EXPOSE 3000
+EXPOSE 4000
 
 # iniciando o servidor
 CMD ["rails", "server", "-b", "0.0.0.0"]

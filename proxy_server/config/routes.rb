@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  resource :purchase, only: %i[create], controller: 'purchase'
+  resource :purchases, only: %i[create], controller: 'purchases'
+  resource :products, only: %i[create], controller: 'products'
 end

@@ -1,15 +1,15 @@
-class RabbitmqClient::Listner
+class RabbitmqClient::Listner < RabbitmqClient::Connection
   def perform
     puts "Consuming messages"
 
-    channel.queue('checkout_to_proxy').subscribe(manual_ack: false, block: true) do |_, _, payload|
+    queue.subscribe(manual_ack: false, block: true) do |_, _, payload|
       puts "📢 Received '#{payload}'"
     end
   end
 
   private
 
-  def channel
-    @channel ||= RabbitmqClient::Connection.new.start.channel
+  def queue
+    @queue ||= channel.queue('checkout_to_proxy')
   end
 end

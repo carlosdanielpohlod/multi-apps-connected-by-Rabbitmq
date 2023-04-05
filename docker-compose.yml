@@ -32,8 +32,7 @@ services:
         aliases:
           - proxy-server
     ports:
-      - '3035:3035'
-      - '5000:5000'
+      - '3000:3000'
     depends_on:
       - rabbitmq
       

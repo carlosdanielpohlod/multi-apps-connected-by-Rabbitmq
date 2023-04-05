@@ -1,8 +1,8 @@
-class PurchaseController < ApplicationController
+class ProductsController < ApplicationController
   def create
     Product.create(permitted_params)
     
-    render json: { msg: 'processing, wait a moment' }, status: :processing
+    render json: { msg: 'processing, wait a moment' }, status: :ok
   end
 
   private
