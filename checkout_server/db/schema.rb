@@ -14,12 +14,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_205128) do
   create_table "products", force: :cascade do |t|
     t.string "name", null: false
     t.float "price", null: false
-    t.integer "external_reference_id", null: false
+    t.bigint "external_reference_id", null: false
   end
 
   create_table "purchases", force: :cascade do |t|
     t.integer "product_id", null: false
-    t.integer "external_user_id", null: false
+    t.bigint "external_user_id", null: false
     t.string "status", default: "pending", null: false
     t.index ["product_id"], name: "index_purchases_on_product_id"
   end

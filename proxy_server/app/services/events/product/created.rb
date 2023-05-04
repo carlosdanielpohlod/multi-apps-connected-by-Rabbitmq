@@ -8,7 +8,7 @@ class Events::Product::Created
       subject: 'product_created',
       price: @product.price,
       name: @product.name,
-      product_id: @product.id
+      external_reference_id: @product.id
     }
   end
 end

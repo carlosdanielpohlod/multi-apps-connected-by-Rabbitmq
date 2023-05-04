@@ -13,54 +13,55 @@ services:
       - 5672:5672
       - 15672:15672
 
-  proxy_server:
-    environment:
-      - RAILS_ENV=development
-      - APP_NAME=proxy_server
-    build:
-      context: ./proxy_server
-    volumes:
-      - .:/var/www/app
-      - bundle_path:/bundle
-    tmpfs:
-      - /tmp
-    stdin_open: true
-    tty: true
-    networks:
-      default:
-      internal:
-        aliases:
-          - proxy-server
-    ports:
-      - '3000:3000'
-    depends_on:
-      - rabbitmq
+  # proxy_server:
+  #   environment:
+  #     - RAILS_ENV=development
+  #     - APP_NAME=proxy_server
+  #   build:
+  #     context: ./proxy_server
+  #   volumes:
+  #     - .:/var/www/app
+  #     - bundle_path:/bundle
+  #   tmpfs:
+  #     - /tmp
+  #   stdin_open: true
+  #   tty: true
+  #   networks:
+  #     default:
+  #     internal:
+  #       aliases:
+  #         - proxy-server
+  #   ports:
+  #     - '3000:3000'
+  #   depends_on:
+  #     - rabbitmq
       
-  checkout_server:
-    environment:
-      - RAILS_ENV=development
-      - APP_NAME=proxy_server
-    build:
-      context: ./proxy_server
-    volumes:
-      - .:/var/www/app
-      - bundle_path:/bundle
-    tmpfs:
-      - /tmp
-    stdin_open: true
-    tty: true
-    networks:
-      default:
-      internal:
-        aliases:
-          - checkout-server
-    ports:
-      - '4000:4000'
-    depends_on:
-      - rabbitmq
+  # checkout_server:
+  #   environment:
+  #     - RAILS_ENV=development
+  #     - APP_NAME=proxy_server
+  #   build:
+  #     context: ./proxy_server
+  #   volumes:
+  #     - .:/var/www/app
+  #     - bundle_path:/bundle
+  #   tmpfs:
+  #     - /tmp
+  #   stdin_open: true
+  #   tty: true
+  #   networks:
+  #     default:
+  #     internal:
+  #       aliases:
+  #         - checkout-server
+  #   ports:
+  #     - '4000:4000'
+  #   depends_on:
+  #     - rabbitmq
 
 volumes:
   bundle_path:
 
 networks:
   internal:
+  

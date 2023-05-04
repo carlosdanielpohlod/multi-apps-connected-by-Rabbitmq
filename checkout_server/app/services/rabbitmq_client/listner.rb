@@ -6,7 +6,7 @@ class RabbitmqClient::Listner
       payload = JSON.parse(payload)
       
       if payload['subject'] == 'product_created'
-        Product.create(external_reference_id: payload['product_id'], name: payload['name'], price: payload['price'])
+        Handler::ProductCreated.new(payload: payload).perform!
       end
     end
   end
@@ -14,6 +14,6 @@ class RabbitmqClient::Listner
   private
 
   def channel
-    @channel ||= RabbitmqClient::Connection.new.start.channel
+    @channel ||= RabbitmqClient::Connection.new.start.create_channel
   end
 end

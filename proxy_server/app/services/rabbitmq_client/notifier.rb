@@ -13,6 +13,6 @@ class RabbitmqClient::Notifier
   private
 
   def channel
-    @channel ||= RabbitmqClient::Connection.new.start.channel
+    @channel ||= RabbitmqClient::Connection.new.start.create_channel
   end
 end

@@ -5,7 +5,7 @@ class RabbitmqClient::Connection
   # automatically_recover: In cause of fail we try or not to recover
 
   def initialize
-    @connection = Bunny.new(host: 'rabbitmq',
+    @connection = Bunny.new(host: 'localhost',
                             port: '5672',
                             vhost: '/',
                             user: 'guest',

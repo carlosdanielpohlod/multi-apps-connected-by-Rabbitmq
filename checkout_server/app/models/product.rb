@@ -6,7 +6,7 @@ class Product < ApplicationRecord
   validates :external_reference_id, uniqueness: true
 
   after_create do
-    created_event = Events::Product::Created.new(product_id: product_id)
+    created_event = Events::Product::Created.new(product_id: id)
     notify(created_event)
   end
 end
