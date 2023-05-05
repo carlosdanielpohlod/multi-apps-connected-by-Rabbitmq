@@ -1,11 +1,10 @@
 class Handler::ProductCreated
-  def initialize(params:)
-    @params = params
+  def initialize(payload:)
+    @payload = payload
   end
 
   def perform!
-    p 'Servidor de checkout: Recebi um produto do servidor proxy: '
-    p @params
+    p @payload
 
     Product.create(
       external_reference_id: @payload['external_reference_id'],

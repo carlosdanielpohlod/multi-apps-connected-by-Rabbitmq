@@ -6,8 +6,8 @@ class Events::Purchase::Created
   def payload
     @payload ||= {
       subject: 'purchase_created',
-      product_id: params[:product_id],
-      user_id: params[:user_id]
+      product_id: @purchase[:product_id],
+      user_id: @purchase[:user_id]
     }
   end
 end

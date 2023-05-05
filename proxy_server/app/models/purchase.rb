@@ -5,8 +5,9 @@ class Purchase < ApplicationRecord
   belongs_to :product
 
   after_create do
-    event = Events::Purchase::Created.new(self)
+    p 'aaa'
+    event = Events::Purchase::Created.new(purchase: self)
 
-    RabbitmqClient::Notifier::Purchase.new(purchase: self).call
+    notify(event)
   end
 end
